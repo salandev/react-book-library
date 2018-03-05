@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Book from './Book'
 
-const Shelf = props => {
+const Shelf = (props) => {
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{props.bookshelfTitle}</h2>
@@ -12,6 +12,7 @@ const Shelf = props => {
           <li key={ book.id }>
             <Book 
               book={ book }
+    		  onChangeShelf={ props.onChangeShelf }
             /> 
           </li>
           ))}
@@ -23,7 +24,8 @@ const Shelf = props => {
 
 Shelf.propTypes = {
   bookshelfTitle: PropTypes.string.isRequired,
-  getShelfBooks: PropTypes.array.isRequired
+  getShelfBooks: PropTypes.array.isRequired,
+  onChangeShelf: PropTypes.func.isRequired
 }
 
 export default Shelf

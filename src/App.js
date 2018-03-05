@@ -14,17 +14,24 @@ class BooksApp extends Component {
     this.loadBooks()
   }
 
-  // Get all books from BooksAPI and assign to Books array as state
+  // Function to get all books from BooksAPI and assign to Books array as state
   loadBooks = () => (
      BooksAPI.getAll().then((books) => {
       this.setState( {books} )
     })
   )
 
-  // Filter books by shelf name
+  // Function to Filter books by shelf name
   getShelfBooks = (shelfName) => (
       this.state.books.filter((book) => book.shelf === shelfName)
   )
+  
+  // Function to move book one shelf to another or to none
+  onChangeShelf = (book, shelf) => {
+      BooksAPI.update(book, shelf).then(() => {
+          this.loadBooks()
+      })
+  }
 
   render() {
     return (
@@ -32,6 +39,7 @@ class BooksApp extends Component {
       	<Route exact path="/" render={() => (
       		<Bookshelf 
 				getShelfBooks={ this.getShelfBooks }
+				onChangeShelf={ this.onChangeShelf }
 			/>
 		)}/>
         <Route path="/search" render={ () => (
