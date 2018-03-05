@@ -14,17 +14,25 @@ class BooksApp extends Component {
     this.loadBooks()
   }
 
+  // Get all books from BooksAPI and assign to Books array as state
   loadBooks = () => (
      BooksAPI.getAll().then((books) => {
       this.setState( {books} )
     })
   )
 
+  // Filter books by shelf name
+  getShelfBooks = (shelfName) => (
+      this.state.books.filter((book) => book.shelf === shelfName)
+  )
+
   render() {
     return (
       <div className="app">
       	<Route exact path="/" render={() => (
-      		<Bookshelf books={this.state.books} />
+      		<Bookshelf 
+				getShelfBooks={ this.getShelfBooks }
+			/>
 		)}/>
         <Route path="/search" render={ () => (
         	<SearchBooks />
