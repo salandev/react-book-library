@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 const Book = (props) => {
   
   const imageLink = props.book.imageLinks ? props.book.imageLinks.smallThumbnail : ''
-  const title = props.book.title ? props.book.title : "No title available"
   const authors = props.book.authors ? props.book.authors.join(" \u0026 ") : null
   const selectValue = props.book.shelf ? props.book.shelf : props.getSearchShelf(props.book)
   
@@ -25,7 +24,7 @@ const Book = (props) => {
           </select>
         </div>
       </div>
-      <div className="book-title">{ title }</div>
+      <div className="book-title">{ props.book.title }</div>
       <div className="book-authors">{ authors }</div>
     </div>
   )
