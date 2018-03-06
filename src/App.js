@@ -45,9 +45,10 @@ class BooksApp extends Component {
         <Route path="/search" render={ ({ history }) => (
           <SearchBooks 
             isBookOnShelf={ this.state.books }
-            onChangeShelf={(book, shelf) => (
-              this.onChangeShelf(book, shelf), history.push('/')
-            )}
+            onChangeShelf={(book, shelf) => {
+              this.onChangeShelf(book, shelf)
+          	  history.push('/')
+        	}}
           />
         )}/>
       </div>
