@@ -12,7 +12,8 @@ class SearchBooks extends Component {
 
   state = {
     search: '',
-    searchBooks: []
+    searchBooks: [],
+    searchError: false
   }
 
   updateQuery = (search) => {   
@@ -20,17 +21,19 @@ class SearchBooks extends Component {
     if(search.trim()) {
       BooksAPI.search(search).then((books) => {
         if(books && books.length > 0) {
-          this.setState({searchBooks: books})
+          this.setState({searchBooks: books, searchError: false})
         } else {
           this.setState({
             searchBooks: [],
+            searchError: true
           })
         }
      })
     } else {
       this.setState({
         search: '',
-        searchBooks: []
+        searchBooks: [],
+        searchError: false
       })
     }
   }
@@ -43,7 +46,7 @@ class SearchBooks extends Component {
   }
 
   render() {
-    const { searchBooks, search } = this.state
+    const { searchBooks, search, searchError } = this.state
     const { onChangeShelf } = this.props
 
     return (
@@ -60,7 +63,11 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
+			{ searchBooks.length > 0 && (
 			<div>
+              <div className="showing-books">
+              	<p>Search returned { searchBooks.length } books</p>
+              </div>
               <ol className="books-grid">
                 { searchBooks.map((book) => (
                 <li key={ book.id }>
@@ -73,6 +80,12 @@ class SearchBooks extends Component {
                 )) }
               </ol>
           	</div>
+		  )}
+          { searchError && (
+           <div className="showing-books">
+                <p>Search returned 0 books.  Please try again!</p>
+            </div>
+          )}
         </div>
       </div>
     )}
