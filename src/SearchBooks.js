@@ -21,7 +21,10 @@ class SearchBooks extends Component {
     if(search.trim()) {
       BooksAPI.search(search).then((books) => {
         if(books && books.length > 0) {
-          this.setState({searchBooks: books, searchError: false})
+          this.setState({
+            searchBooks: books, 
+            searchError: false
+          })
         } else {
           this.setState({
             searchBooks: [],
@@ -64,13 +67,9 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
 			{ searchBooks.length > 0 && (
-			<div>
-              <div className="showing-books">
-              	<p>Search returned { searchBooks.length } books</p>
-              </div>
-              <ol className="books-grid">
+        	<ol className="books-grid">
                 { searchBooks.map((book) => (
-                <li key={ book.id }>
+            	<li key={ book.id }>
                   <Book
                       book={ book }
                       getSearchShelf={ this.getSearchShelf }
@@ -78,14 +77,13 @@ class SearchBooks extends Component {
                   />
                 </li>
                 )) }
-              </ol>
-          	</div>
-		  )}
-          { searchError && (
-           <div className="showing-books">
-                <p>Search returned 0 books.  Please try again!</p>
-            </div>
-          )}
+             </ol>
+		    )}
+            { searchError && (
+           	 <div className="showing-books">
+             	<p>Sorry no books found!</p>
+             </div>
+            )}
         </div>
       </div>
     )}
