@@ -6,7 +6,7 @@ const Book = (props) => {
   const imageLink = props.book.imageLinks ? props.book.imageLinks.smallThumbnail : ''
   const title = props.book.title ? props.book.title : "No title available"
   const authors = props.book.authors ? props.book.authors.join(" \u0026 ") : null
-  const selectValue = props.book.shelf ? props.book.shelf : props.getSearchShelf(props.book) 
+  const selectValue = props.book.shelf ? props.book.shelf : props.getSearchShelf(props.book)
   
   return (
     <div className="book">
@@ -17,7 +17,7 @@ const Book = (props) => {
             value={ selectValue }
             onChange={(event) => (props.onChangeShelf(props.book, event.target.value))}
           >
-              <option value="none" disabled>Move to...</option>
+              <option value="" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>
