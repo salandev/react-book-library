@@ -2,13 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Book = (props) => {
+  
+  const imageLink = props.book.imageLinks ? props.book.imageLinks.smallThumbnail : ''
+  const title = props.book.title ? props.book.title : "No title available"
+  const authors = props.book.authors ? props.book.authors.join(" \u0026 ") : null
+  const selectValue = props.book.shelf ? props.book.shelf : props.getSearchShelf(props.book) 
+  
   return (
     <div className="book">
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks.smallThumbnail})` }}></div>
+        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLink})` }}></div>
         <div className="book-shelf-changer">
           <select
-            value={ props.book.shelf }
+            value={ selectValue }
             onChange={(event) => (props.onChangeShelf(props.book, event.target.value))}
           >
               <option value="none" disabled>Move to...</option>
@@ -19,8 +25,8 @@ const Book = (props) => {
           </select>
         </div>
       </div>
-      <div className="book-title">{ props.book.title }</div>
-      <div className="book-authors">{ props.book.authors }</div>
+      <div className="book-title">{ title }</div>
+      <div className="book-authors">{ authors }</div>
     </div>
   )
 }
