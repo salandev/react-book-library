@@ -13,21 +13,21 @@ const Bookshelf = (props) => {
             <div>
               <Shelf 
                 bookshelfTitle="Currently Reading"
-                getShelfBooks={ props.getShelfBooks("currentlyReading") }
+                books={ props.books.filter(book => book.shelf === 'currentlyReading') }
 				onChangeShelf={ props.onChangeShelf }
               />
             </div>
             <div>
               <Shelf 
                 bookshelfTitle="Want To Read"
-                getShelfBooks={ props.getShelfBooks("wantToRead") }
+                books={ props.books.filter(book => book.shelf === 'wantToRead') }
 				onChangeShelf={ props.onChangeShelf }
               />
             </div>
             <div>
               <Shelf 
                 bookshelfTitle="Read"
-                getShelfBooks={ props.getShelfBooks("read") }
+                books={ props.books.filter(book => book.shelf === 'read') }
 				onChangeShelf={ props.onChangeShelf }
               />
             </div>
@@ -40,7 +40,7 @@ const Bookshelf = (props) => {
 }
 
 Bookshelf.propTypes = {
-  getShelfBooks: PropTypes.func.isRequired,
+  books: PropTypes.array.isRequired,
   onChangeShelf: PropTypes.func.isRequired
 }
 

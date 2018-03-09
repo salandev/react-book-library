@@ -8,7 +8,7 @@ const Shelf = (props) => {
       <h2 className="bookshelf-title">{props.bookshelfTitle}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
-          {props.getShelfBooks.map((book) => (
+          {props.books.map((book) => (
           <li key={ book.id }>
             <Book 
               book={ book }
@@ -24,7 +24,7 @@ const Shelf = (props) => {
 
 Shelf.propTypes = {
   bookshelfTitle: PropTypes.string.isRequired,
-  getShelfBooks: PropTypes.array.isRequired,
+  books: PropTypes.array.isRequired,
   onChangeShelf: PropTypes.func.isRequired
 }
 

@@ -21,12 +21,7 @@ class BooksApp extends Component {
     })
   )
 
-  // Function to Filter books by shelf name
-  getShelfBooks = (shelfName) => (
-      this.state.books.filter((book) => book.shelf === shelfName)
-  )
-  
-  // Function to move book one shelf to another or to none
+  // Function to move book from one shelf to another or to none
   onChangeShelf = (book, shelf) => {
       BooksAPI.update(book, shelf).then(() => {
           this.loadBooks()
@@ -34,17 +29,18 @@ class BooksApp extends Component {
   }
 
   render() {
+    const { books } = this.state
     return (
       <div className="app">
       	<Route exact path="/" render={() => (
       		<Bookshelf 
-				getShelfBooks={ this.getShelfBooks }
+				books={ books }
 				onChangeShelf={ this.onChangeShelf }
 			/>
 		)}/>
         <Route path="/search" render={ () => (
           <SearchBooks 
-            isBookOnShelf={ this.state.books }
+            isBookOnShelf={ books }
             onChangeShelf={ this.onChangeShelf }
           />
         )}/>
